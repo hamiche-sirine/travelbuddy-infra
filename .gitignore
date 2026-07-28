@@ -1,0 +1,30 @@
+# État Terraform — contient des secrets en clair
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Dossier de travail local — providers téléchargés, régénérables
+.terraform/
+
+# Plans enregistrés — contiennent les valeurs à appliquer
+*.tfplan
+tfplan
+
+# Fichiers de variables — peuvent contenir des secrets
+*.tfvars
+*.tfvars.json
+!example.tfvars
+
+# Logs de crash
+crash.log
+crash.*.log
+
+# Surcharges locales
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Configuration CLI locale
+.terraformrc
+terraform.rc
