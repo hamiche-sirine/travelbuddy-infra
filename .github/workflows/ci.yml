@@ -1,0 +1,54 @@
+name: CI Terraform
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validation:
+    name: Validation et plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.15.8
+          terraform_wrapper: false
+
+      - name: Se connecter a Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Verifier le formatage
+        run: terraform fmt -check -recursive
+
+      - name: Initialiser le backend
+        run: terraform init
+
+      - name: Valider la syntaxe
+        run: terraform validate
+
+      - name: Scanner la securite
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          soft_fail: true
+
+      - name: Generer le plan
+        run: terraform plan -out=tfplan -input=false
+
+      - name: Publier l artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: tfplan
+          retention-days: 5
