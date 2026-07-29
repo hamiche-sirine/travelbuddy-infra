@@ -143,7 +143,7 @@ resource "azurerm_container_app" "backend" {
       }
       env {
         name  = "CORS_ORIGINS"
-        value = "https://ca-frontend-${var.project}-${var.environment}.${azurerm_container_app_environment.main.default_domain}"
+        value = "[\"https://ca-frontend-${var.project}-${var.environment}.${azurerm_container_app_environment.main.default_domain}\"]"
       }
 
     }

@@ -25,7 +25,7 @@ variable "environment" {
 variable "backend_image" {
   type        = string
   description = "Image du backend FastAPI"
-  default     = "acrtravelbuddydev.azurecr.io/travelbuddy-backend:v2"
+  default     = "acrtravelbuddydev.azurecr.io/travelbuddy-backend:v4"
 }
 
 variable "frontend_image" {
