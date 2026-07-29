@@ -26,3 +26,17 @@ resource "azurerm_key_vault_secret" "postgres_password" {
   value        = random_password.postgres.result
   key_vault_id = azurerm_key_vault.main.id
 }
+
+resource "azurerm_postgresql_flexible_server_database" "main" {
+  name      = "travelbuddy"
+  server_id = azurerm_postgresql_flexible_server.main.id
+  collation = "en_US.utf8"
+  charset   = "utf8"
+}
+
+resource "azurerm_postgresql_flexible_server_firewall_rule" "azure_services" {
+  name             = "AllowAzureServices"
+  server_id        = azurerm_postgresql_flexible_server.main.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
