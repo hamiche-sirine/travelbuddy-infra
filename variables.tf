@@ -21,3 +21,15 @@ variable "environment" {
   description = "Environnement cible : dev, test ou prod"
   default     = "dev"
 }
+
+variable "backend_image" {
+  type        = string
+  description = "Image du backend FastAPI"
+  default     = "mcr.microsoft.com/k8se/quickstart:latest"
+}
+
+variable "frontend_image" {
+  type        = string
+  description = "Image du frontend Next.js"
+  default     = "mcr.microsoft.com/k8se/quickstart:latest"
+}
