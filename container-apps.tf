@@ -101,7 +101,7 @@ resource "azurerm_container_app" "backend" {
 
     container {
       name   = "backend"
-      image  = "${azurerm_container_registry.main.login_server}/travelbuddy-backend:v1"
+      image  = var.backend_image
       cpu    = 1.0
       memory = "2Gi"
 
@@ -141,6 +141,11 @@ resource "azurerm_container_app" "backend" {
         name  = "ANONYMIZED_TELEMETRY"
         value = "False"
       }
+      env {
+        name  = "CORS_ORIGINS"
+        value = "https://ca-frontend-${var.project}-${var.environment}.${azurerm_container_app_environment.main.default_domain}"
+      }
+
     }
   }
 
@@ -178,7 +183,7 @@ resource "azurerm_container_app" "frontend" {
 
     container {
       name   = "frontend"
-      image  = "${azurerm_container_registry.main.login_server}/travelbuddy-frontend:v1"
+      image  = var.frontend_image
       cpu    = 1.0
       memory = "2Gi"
 
@@ -198,4 +203,5 @@ resource "azurerm_container_app" "frontend" {
       percentage      = 100
     }
   }
+
 }

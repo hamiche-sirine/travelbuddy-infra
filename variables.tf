@@ -25,11 +25,11 @@ variable "environment" {
 variable "backend_image" {
   type        = string
   description = "Image du backend FastAPI"
-  default     = "mcr.microsoft.com/k8se/quickstart:latest"
+  default     = "acrtravelbuddydev.azurecr.io/travelbuddy-backend:v2"
 }
 
 variable "frontend_image" {
   type        = string
   description = "Image du frontend Next.js"
-  default     = "mcr.microsoft.com/k8se/quickstart:latest"
+  default     = "acrtravelbuddydev.azurecr.io/travelbuddy-frontend:v2"
 }
