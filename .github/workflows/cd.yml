@@ -2,7 +2,7 @@ name: CD Terraform
 
 on:
   workflow_run:
-    workflows: [CI Terraform]
+    workflows: [CI Terraform]   # ← attend la CI
     types: [completed]
     branches: [main]
 
@@ -14,8 +14,8 @@ jobs:
   deploiement:
     name: Application sur Azure
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    environment: production
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}   # ← seulement si elle a réussi
+    environment: production     # ← met en pause
 
     steps:
       - name: Recuperer le code
