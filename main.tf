@@ -6,6 +6,6 @@ resource "azurerm_resource_group" "main" {
     project     = var.project
     environment = var.environment
     managed_by  = "terraform"
-    row=random
+    row= "random"
   }
 }
